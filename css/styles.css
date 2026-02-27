@@ -1,0 +1,885 @@
+/* ============================================
+   CARFLOW - GitHub Pages Theme
+   ============================================ */
+
+/* --- FONTS --- */
+@font-face {
+  font-family: 'CarFlowTitle';
+  src: url('../assets/fonts/UberMove-Bold.woff2') format('woff2'),
+       url('../assets/fonts/UberMove-Bold.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CarFlowBody';
+  src: url('../assets/fonts/UberMove-Medium.woff2') format('woff2'),
+       url('../assets/fonts/UberMove-Medium.woff') format('woff');
+  font-display: swap;
+}
+
+/* --- CSS VARIABLES --- */
+:root {
+  --primary: #e66912;
+  --primary-light: rgba(230, 105, 18, 0.15);
+  --bg: #FFFFFF;
+  --bg-secondary: #F0F2F6;
+  --text: #31333F;
+  --text-light: #6b7280;
+  --text-muted: #dadfe9;
+  --dark: #2d1b27;
+  --spain: #970c10;
+  --germany: #153250;
+  --gray-select: #a4a5ad;
+  --border: #e5e7eb;
+  --border-light: #f0f0f0;
+  --sidebar-width: 340px;
+  --nav-height: 52px;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --transition: 0.2s ease;
+}
+
+/* --- RESET & BASE --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'CarFlowBody', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'CarFlowTitle', sans-serif;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* --- LAYOUT --- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 16px;
+  transition: transform var(--transition);
+}
+
+.sidebar.collapsed {
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  transition: margin-left var(--transition);
+}
+
+.main-content.expanded {
+  margin-left: 0;
+}
+
+.sidebar-header {
+  padding: 8px 0 16px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 16px;
+}
+
+.sidebar-logo {
+  height: 32px;
+  width: auto;
+}
+
+/* --- TOP NAV --- */
+.top-nav {
+  display: flex;
+  align-items: center;
+  height: var(--nav-height);
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  gap: 16px;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  transition: background var(--transition);
+}
+
+.sidebar-toggle:hover {
+  background: var(--bg-secondary);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'CarFlowTitle', sans-serif;
+  font-size: 13px;
+  color: var(--text-light);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  background: var(--bg-secondary);
+  color: var(--text);
+}
+
+.nav-tab.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.nav-spacer {
+  flex: 1;
+}
+
+/* --- PAGE CONTENT --- */
+.page-content {
+  padding: 24px;
+  position: relative;
+}
+
+/* --- PAGE TITLE --- */
+.page-title {
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.page-title .title-word {
+  font-family: 'CarFlowTitle', sans-serif;
+  font-size: 64px;
+  font-weight: bold;
+  color: var(--text-muted);
+}
+
+.page-title .title-selection {
+  font-family: 'CarFlowTitle', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--primary);
+  margin-left: 8px;
+}
+
+/* --- LOADING --- */
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  color: var(--text-light);
+  gap: 16px;
+}
+
+.loading-overlay.hidden {
+  display: none;
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- SIDEBAR SECTIONS --- */
+.sidebar-section {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.sidebar-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+/* --- SELECT / INPUT --- */
+.cf-select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'CarFlowBody', sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  margin-bottom: 6px;
+  transition: border-color var(--transition);
+}
+
+.cf-select:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+
+.cf-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.cf-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cf-number-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'CarFlowBody', sans-serif;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color var(--transition);
+}
+
+.cf-number-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* --- VARIANT CHIPS --- */
+.variant-container {
+  position: relative;
+}
+
+.selected-variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.variant-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.variant-chip-remove {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity var(--transition);
+}
+
+.variant-chip-remove:hover {
+  opacity: 1;
+}
+
+/* --- TABS --- */
+.tabs-container {
+  display: flex;
+  gap: 2px;
+  border-bottom: 2px solid var(--border-light);
+  margin-bottom: 16px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'CarFlowTitle', sans-serif;
+  font-size: 13px;
+  color: var(--text-light);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+}
+
+.tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* --- CARDS & CONTAINERS --- */
+.cf-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: var(--bg);
+}
+
+.cf-card-sm {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  background: var(--bg);
+}
+
+/* --- DESCRIPTION BOX --- */
+.description-box {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-top: 12px;
+  background: var(--bg);
+}
+
+.description-box .desc-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.description-box .desc-text {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* --- TOGGLE SWITCH --- */
+.cf-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cf-toggle input {
+  display: none;
+}
+
+.cf-toggle .toggle-track {
+  width: 32px;
+  height: 18px;
+  background: var(--gray-select);
+  border-radius: 9px;
+  position: relative;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+
+.cf-toggle input:checked + .toggle-track {
+  background: var(--primary);
+}
+
+.cf-toggle .toggle-track::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform var(--transition);
+}
+
+.cf-toggle input:checked + .toggle-track::after {
+  transform: translateX(14px);
+}
+
+.cf-toggle .toggle-label {
+  font-size: 12px;
+  color: var(--text);
+}
+
+.toggle-spain .toggle-track { background: var(--gray-select); }
+.toggle-spain input:checked + .toggle-track { background: var(--spain); }
+
+.toggle-germany .toggle-track { background: var(--gray-select); }
+.toggle-germany input:checked + .toggle-track { background: var(--germany); }
+
+/* --- BUTTONS --- */
+.cf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: 'CarFlowTitle', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.cf-btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.cf-btn-primary:hover {
+  background: #d55d0e;
+}
+
+.cf-btn-outline {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.cf-btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* --- THREE-COLUMN CHART GRID --- */
+.chart-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.chart-grid-3 > .chart-container {
+  min-width: 0;
+  overflow: hidden;
+  height: 500px;
+}
+
+/* --- AD CARD --- */
+.ad-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 180px 1fr 1fr;
+  gap: 16px;
+  background: var(--bg);
+  transition: box-shadow var(--transition);
+}
+
+.ad-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.ad-card-image {
+  width: 180px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: var(--bg-secondary);
+}
+
+.ad-card-price {
+  font-family: 'CarFlowTitle', sans-serif;
+  font-size: 24px;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.ad-card-title {
+  font-family: 'CarFlowTitle', sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.ad-card-specs {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.ad-card-location {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.ad-card-time {
+  font-size: 11px;
+  color: var(--gray-select);
+}
+
+.ad-card-site-logo {
+  height: 22px;
+  width: auto;
+  margin-bottom: 8px;
+}
+
+.ad-price-history-toggle {
+  font-size: 11px;
+  color: var(--primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.ad-price-history-toggle:hover {
+  text-decoration: underline;
+}
+
+.price-history-chart {
+  height: 100px;
+  margin-bottom: 6px;
+}
+
+/* --- ADS BOARD --- */
+.ads-board-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.ads-board-header label {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.pagination-info {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-left: auto;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.pagination-controls button {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  transition: all var(--transition);
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* --- FILTER ROW --- */
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.filter-row label {
+  font-size: 11px;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* --- SIDEBAR EXPANDER --- */
+.sidebar-expander {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.sidebar-expander-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  transition: background var(--transition);
+}
+
+.sidebar-expander-header:hover {
+  background: var(--bg-secondary);
+}
+
+.sidebar-expander-header .arrow {
+  transition: transform var(--transition);
+  font-size: 10px;
+  color: var(--text-light);
+}
+
+.sidebar-expander.open .sidebar-expander-header .arrow {
+  transform: rotate(180deg);
+}
+
+.sidebar-expander-content {
+  display: none;
+  padding: 0 12px 12px;
+}
+
+.sidebar-expander.open .sidebar-expander-content {
+  display: block;
+}
+
+/* --- VIS OPTIONS: Country columns --- */
+.vis-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.vis-country-col {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+}
+
+.vis-country-col h6 {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+/* --- NO DATA STATE --- */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+
+.empty-state h3 {
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 13px;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* --- CHART CONTAINERS --- */
+.chart-container {
+  width: 100%;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(calc(-1 * var(--sidebar-width)));
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  .chart-grid-3 {
+    grid-template-columns: 1fr;
+  }
+  .ad-card {
+    grid-template-columns: 140px 1fr;
+  }
+  .ad-card > :nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title .title-word {
+    font-size: 40px;
+  }
+  .page-title .title-selection {
+    font-size: 20px;
+  }
+  .ad-card {
+    grid-template-columns: 1fr;
+  }
+  .ad-card-image {
+    width: 100%;
+    height: 180px;
+  }
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+/* Plotly chart responsive fix */
+.js-plotly-plot, .plotly {
+  width: 100% !important;
+}
+
+/* --- FLOATING AD HOVER CARD --- */
+.ads-hover-card {
+  position: fixed;
+  z-index: 1000;
+  width: 240px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+  display: flex;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.ads-hover-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ahc-img {
+  width: 90px;
+  height: 100%;
+  min-height: 100px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+}
+
+.ahc-body {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ahc-price {
+  font-family: 'CarFlowTitle', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.ahc-specs {
+  font-size: 11px;
+  color: var(--text);
+}
+
+.ahc-meta {
+  font-size: 11px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ahc-flag {
+  width: 16px;
+  height: auto;
+  border-radius: 2px;
+}
+
+.ahc-model {
+  font-size: 10px;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Make scatter plot points look clickable */
+.js-plotly-plot .scatterlayer .point {
+  cursor: pointer;
+}
