@@ -800,6 +800,14 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
 }
 
+/* Full-width scatter chart */
+.scatter-full-width {
+  margin-left: -24px;
+  margin-right: -24px;
+  width: calc(100% + 48px);
+  min-height: 75vh;
+}
+
 /* Plotly chart responsive fix */
 .js-plotly-plot, .plotly {
   width: 100% !important;

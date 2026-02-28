@@ -57,7 +57,7 @@ const MarketPage = {
 
       <!-- SCATTER TAB -->
       <div class="tab-panel" id="tab-scatter">
-        <div id="market-scatter" class="chart-container" style="min-height:550px;"></div>
+        <div id="market-scatter" class="chart-container scatter-full-width"></div>
         ${this._descriptionBox(demandMetric)}
         ${this._descriptionBox(profitMetric)}
       </div>

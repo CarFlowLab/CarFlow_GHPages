@@ -180,10 +180,11 @@ const CF_CHARTS = {
       hoverinfo: 'text',
     };
 
+    const containerHeight = el.clientHeight || 550;
     const layout = {
       ...this._baseLayout,
-      height: 550,
-      margin: { t: 20, r: 20, b: 50, l: 60 },
+      height: Math.max(containerHeight, 550),
+      margin: { t: 20, r: 30, b: 50, l: 60 },
       xaxis: {
         title: demandMetric.user_name,
         range: [demandMetric.low_lim, demandMetric.high_lim],
